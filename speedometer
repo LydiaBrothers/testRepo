@@ -1,0 +1,10 @@
+#!/bin/bash
+
+START=$(head -n2 wq-stats.log | tail -n1 | head -c16)
+FINISH=$(tail -n1 wq-stats.log | head -c16)
+
+DIFF=$(($FINISH - $START))
+
+SECS=$((DIFF/1000000))
+RESULT=$(
+printf "Time Elapsed (D:H:M:S): %02d:%02d:%02d:%02d\n" "$((SECS/86400))" "$((SECS/3600%24))" "$((SECS/60%60))" "$((SECS%60))")
